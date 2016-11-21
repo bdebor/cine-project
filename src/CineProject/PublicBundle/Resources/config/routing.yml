@@ -1,0 +1,7 @@
+cine_project_public_homepage:
+    path:     /
+    defaults: { _controller: CineProjectPublicBundle:Default:index }
+
+cine_project_public_test:
+    path:     /test/{testNumber}
+    defaults: { _controller: CineProjectPublicBundle:Default:test, testNumber: 1 }

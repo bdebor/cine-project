@@ -1,3 +1,11 @@
+cine_project_public:
+    resource: "@CineProjectPublicBundle/Resources/config/routing.yml"
+    prefix:   /
+
+#cine_project_public:
+#    resource: "@CineProjectPublicBundle/Controller/"
+#    type:     annotation
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
