@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Actors list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fisrtname</th>
+                <th>Lastname</th>
+                <th>Birthdate</th>
+                <th>Biography</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for actor in actors %}
+            <tr>
+                <td><a href="{{ path('actor_show', { 'id': actor.id }) }}">{{ actor.id }}</a></td>
+                <td>{{ actor.fisrtName }}</td>
+                <td>{{ actor.lastName }}</td>
+                <td>{% if actor.birthDate %}{{ actor.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ actor.biography|nl2br }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('actor_show', { 'id': actor.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('actor_edit', { 'id': actor.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('actor_new') }}">Create a new actor</a>
+        </li>
+    </ul>
+{% endblock %}

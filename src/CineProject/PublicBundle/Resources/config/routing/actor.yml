@@ -1,0 +1,24 @@
+actor_index:
+    path:     /
+    defaults: { _controller: "CineProjectPublicBundle:Actor:index" }
+    methods:  GET
+
+actor_show:
+    path:     /{id}/show
+    defaults: { _controller: "CineProjectPublicBundle:Actor:show" }
+    methods:  GET
+
+actor_new:
+    path:     /new
+    defaults: { _controller: "CineProjectPublicBundle:Actor:new" }
+    methods:  [GET, POST]
+
+actor_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CineProjectPublicBundle:Actor:edit" }
+    methods:  [GET, POST]
+
+actor_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CineProjectPublicBundle:Actor:delete" }
+    methods:  DELETE

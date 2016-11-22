@@ -1,3 +1,7 @@
+cine_project_public_actor:
+    resource: "@CineProjectPublicBundle/Resources/config/routing/actor.yml"
+    prefix:   /actor
+
 cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }
