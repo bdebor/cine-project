@@ -13,12 +13,12 @@ movie_new:
     defaults: { _controller: "CineProjectPublicBundle:Movie:new" }
     methods:  [GET, POST]
 
-actor_edit:
+movie_edit:
     path:     /{id}/edit
-    defaults: { _controller: "CineProjectPublicBundle:Actor:edit" }
+    defaults: { _controller: "CineProjectPublicBundle:Movie:edit" }
     methods:  [GET, POST]
 
-actor_delete:
+movie_delete:
     path:     /{id}/delete
-    defaults: { _controller: "CineProjectPublicBundle:Actor:delete" }
+    defaults: { _controller: "CineProjectPublicBundle:Movie:delete" }
     methods:  DELETE

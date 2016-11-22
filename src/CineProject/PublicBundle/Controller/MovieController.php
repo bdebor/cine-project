@@ -45,4 +45,24 @@ class MovieController extends Controller
             //'delete_form' => $deleteForm->createView(),
         ));
     }
+
+    public function editAction(Request $request, Movie $movie)
+    {
+        //$deleteForm = $this->createDeleteForm($actor);
+        $editForm = $this->createForm('CineProject\PublicBundle\Form\MovieType', $movie);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('movie_edit', array('id' => $movie->getId()));
+        }
+
+        return $this->render('CineProjectPublicBundle:Movie:edit.html.twig', array(
+            'movie' => $movie,
+            'edit_form' => $editForm->createView(),
+            // 'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
 }
