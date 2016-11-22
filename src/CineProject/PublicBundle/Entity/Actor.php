@@ -24,21 +24,21 @@ class Actor
     /**
      * @var string
      *
-     * @ORM\Column(name="fisrtName", type="string", length=255)
+     * @ORM\Column(name="fisrt_name", type="string", length=255)
      */
     private $fisrtName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=255)
+     * @ORM\Column(name="last_name", type="string", length=255)
      */
     private $lastName;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthDate", type="datetime")
+     * @ORM\Column(name="birth_date", type="datetime")
      */
     private $birthDate;
 
