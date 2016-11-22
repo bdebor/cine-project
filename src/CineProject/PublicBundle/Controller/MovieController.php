@@ -27,7 +27,7 @@ class MovieController extends Controller
             $em->persist($movie);
             $em->flush($movie);
 
-            //return $this->redirectToRoute('actor_show', array('id' => $actor->getId()));
+            return $this->redirectToRoute('movie_show', array('id' => $movie->getId()));
         }
 
         return $this->render('CineProjectPublicBundle:Movie:new.html.twig', array(
@@ -38,17 +38,16 @@ class MovieController extends Controller
 
     public function showAction(Movie $movie)
     {
-        //$deleteForm = $this->createDeleteForm($movie);
-
+        $deleteForm = $this->createDeleteForm($movie);
         return $this->render('CineProjectPublicBundle:Movie:show.html.twig', array(
             'movie' => $movie,
-            //'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
     public function editAction(Request $request, Movie $movie)
     {
-        //$deleteForm = $this->createDeleteForm($actor);
+        $deleteForm = $this->createDeleteForm($movie);
         $editForm = $this->createForm('CineProject\PublicBundle\Form\MovieType', $movie);
         $editForm->handleRequest($request);
 
@@ -61,8 +60,30 @@ class MovieController extends Controller
         return $this->render('CineProjectPublicBundle:Movie:edit.html.twig', array(
             'movie' => $movie,
             'edit_form' => $editForm->createView(),
-            // 'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
+    public function deleteAction(Request $request, Movie $movie)
+    {
+        $form = $this->createDeleteForm($movie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($movie);
+            $em->flush($movie);
+        }
+
+        return $this->redirectToRoute('movie_index');
+    }
+
+    private function createDeleteForm(Movie $movie) // ???
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('movie_delete', array('id' => $movie->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
+    }
 }

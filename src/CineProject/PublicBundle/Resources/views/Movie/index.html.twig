@@ -4,7 +4,7 @@
 	<ul>
 		{% for movie in movies %}
 			<li>
-				<h4>{{ movie.title }}</h4>
+				<h4><a href="{{ path('movie_show', { 'id': movie.id }) }}">{{ movie.title }}</a></h4>
 				<p>{{ movie.description|nl2br }}</p>
 				<p>{{ movie.releaseDate|date('d/m/Y') }}</p>
 			</li>
@@ -13,7 +13,7 @@
 
 	<ul>
 		<li>
-			<a href="{{ path('actor_new') }}">Create a new actor</a>
+			<a href="{{ path('movie_new') }}">Create a new actor</a>
 		</li>
 	</ul>
 {% endblock %}
