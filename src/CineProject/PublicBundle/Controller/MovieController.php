@@ -78,6 +78,26 @@ class MovieController extends Controller
         return $this->redirectToRoute('movie_index');
     }
 
+//    public function deleteAction(Movie $movie)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($movie);
+//        $em->flush($movie);
+//
+//        return $this->redirectToRoute('movie_index');
+//    }
+//
+//    public function deleteAction($movieId)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//        $movie = $em->getRepository('CineProjectPublicBundle:Movie')->find($movieId);
+//        $em->remove($movie);
+//        $em->flush($movie);
+//
+//        return $this->redirectToRoute('movie_index');
+//    }
+
+
     private function createDeleteForm(Movie $movie) // ???
     {
         return $this->createFormBuilder()
