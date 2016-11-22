@@ -1,11 +1,11 @@
 cine_project_public_actor:
     resource: "@CineProjectPublicBundle/Resources/config/routing/actor.yml"
-    prefix:   /actor
+    prefix:   /acteur
+
+cine_project_public_film:
+    resource: "@CineProjectPublicBundle/Resources/config/routing/movie.yml"
+    prefix:  /film
 
 cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }
-
-cine_project_movie_display_all:
-    path:     /films
-    defaults: { _controller: CineProjectPublicBundle:Movie:displayAll }

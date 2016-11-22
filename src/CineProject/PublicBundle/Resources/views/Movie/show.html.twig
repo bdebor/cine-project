@@ -1,0 +1,7 @@
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
+
+{% block body %}
+    <h4>{{ movie.title }}</h4>
+    <p>{{ movie.description|nl2br }}</p>
+    <p>{{ movie.releaseDate|date('d/m/Y') }}</p>
+{% endblock %}
