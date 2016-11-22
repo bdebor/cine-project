@@ -38,9 +38,9 @@ class Movie
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="release_date", type="datetime")
      */
-    private $createdAt;
+    private $releaseDate;
 
     /**
      * @var boolean
@@ -48,6 +48,7 @@ class Movie
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
 
     /**
      * Get id
@@ -106,26 +107,26 @@ class Movie
     }
 
     /**
-     * Set createdAt
+     * Set releaseDate
      *
-     * @param \DateTime $createdAt
+     * @param \DateTime $releaseDate
      * @return Movie
      */
-    public function setCreatedAt($createdAt)
+    public function setReleaseDate($releaseDate)
     {
-        $this->createdAt = $createdAt;
+        $this->releaseDate = $releaseDate;
 
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get releaseDate
      *
      * @return \DateTime 
      */
-    public function getCreatedAt()
+    public function getReleaseDate()
     {
-        return $this->createdAt;
+        return $this->releaseDate;
     }
 
     /**
