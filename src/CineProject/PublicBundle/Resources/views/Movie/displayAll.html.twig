@@ -1,0 +1,13 @@
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
+
+{% block body %}
+	<ul>
+		{% for movie in movies %}
+			<li>
+				<h4>{{ movie.title }}</h4>
+				<p>{{ movie.description }}</p>
+				<p>{{ movie.createdAt|date('d/m/Y') }}</p>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

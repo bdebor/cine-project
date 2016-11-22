@@ -2,6 +2,6 @@ cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }
 
-cine_project_public_test:
-    path:     /test/{testNumber}
-    defaults: { _controller: CineProjectPublicBundle:Default:test, testNumber: 1 }
+cine_project_movie_display_all:
+    path:     /films
+    defaults: { _controller: CineProjectPublicBundle:Movie:displayAll }

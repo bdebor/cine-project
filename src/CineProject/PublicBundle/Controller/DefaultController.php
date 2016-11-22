@@ -10,10 +10,4 @@ class DefaultController extends Controller
     {
         return $this->render('CineProjectPublicBundle:Default:index.html.twig');
     }
-
-    public function testAction($testNumber)
-    {
-        dump($testNumber);
-        return $this->render('CineProjectPublicBundle:Default:index.html.twig');
-    }
 }
