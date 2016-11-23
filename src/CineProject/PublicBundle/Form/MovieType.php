@@ -24,7 +24,12 @@ class MovieType extends AbstractType
                 'choices' => array(0 => 'Non', 1 => 'Oui' ),
                 'expanded' => true,
                 'multiple' => false,
-    ));
+            ))
+            ->add('actors','entity', array(
+                'class' => 'CineProjectPublicBundle:Actor',
+                'property' => 'fullName',
+                'multiple' => true
+            ));
     }
     
     /**

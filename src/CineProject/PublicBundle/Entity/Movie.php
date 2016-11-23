@@ -2,6 +2,7 @@
 
 namespace CineProject\PublicBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -57,6 +58,15 @@ class Movie
      */
     private $visible;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="CineProject\PublicBundle\Entity\Actor")
+     */
+    private $actors;
+
+    public function __construct()
+    {
+        $this->actors = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -158,5 +168,38 @@ class Movie
     public function getVisible()
     {
         return $this->visible;
+    }
+
+    /**
+     * Add actors
+     *
+     * @param \CineProject\PublicBundle\Entity\Actor $actors
+     * @return Movie
+     */
+    public function addActor(\CineProject\PublicBundle\Entity\Actor $actors)
+    {
+        $this->actors[] = $actors;
+
+        return $this;
+    }
+
+    /**
+     * Remove actors
+     *
+     * @param \CineProject\PublicBundle\Entity\Actor $actors
+     */
+    public function removeActor(\CineProject\PublicBundle\Entity\Actor $actors)
+    {
+        $this->actors->removeElement($actors);
+    }
+
+    /**
+     * Get actors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActors()
+    {
+        return $this->actors;
     }
 }

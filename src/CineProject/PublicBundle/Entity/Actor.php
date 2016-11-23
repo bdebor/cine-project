@@ -49,6 +49,10 @@ class Actor
      */
     private $biography;
 
+    public function getFullName()
+    {
+        return $this->fisrtName.' '.$this->lastName;
+    }
 
     /**
      * Get id
