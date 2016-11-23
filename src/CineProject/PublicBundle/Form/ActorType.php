@@ -18,7 +18,9 @@ class ActorType extends AbstractType
             ->add('lastName')
             ->add('birthDate')
             ->add('biography')
-            ->add('image',new ImageType())
+            ->add('image',new ImageType(), array(
+                'required' => false
+            ))
         ;
     }
     

@@ -45,7 +45,7 @@
             <a href="{{ path('actor_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('actor_edit', { 'id': actor.id }) }}">Edit</a>
+            <a href="{{ path('actor_edit', { 'slug': actor.slug }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

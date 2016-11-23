@@ -1,6 +1,6 @@
 cine_project_public_actor:
     resource: "@CineProjectPublicBundle/Resources/config/routing/actor.yml"
-    prefix:   /acteur
+    prefix:   /
 
 cine_project_public_film:
     resource: "@CineProjectPublicBundle/Resources/config/routing/movie.yml"

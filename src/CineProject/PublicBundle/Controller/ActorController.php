@@ -42,7 +42,7 @@ class ActorController extends Controller
             $em->persist($actor);
             $em->flush($actor);
 
-            return $this->redirectToRoute('actor_show', array('id' => $actor->getId()));
+            return $this->redirectToRoute('actor_show', array('slug' => $actor->getSlug()));
         }
 
         return $this->render('CineProjectPublicBundle:Actor:new.html.twig', array(
@@ -78,7 +78,7 @@ class ActorController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('actor_edit', array('id' => $actor->getId()));
+            return $this->redirectToRoute('actor_edit', array('slug' => $actor->getSlug()));
         }
 
         return $this->render('CineProjectPublicBundle:Actor:edit.html.twig', array(

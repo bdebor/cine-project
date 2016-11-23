@@ -43,6 +43,7 @@ L'après Kill Bill est plutôt dur pour la comédienne, qui a du mal à trouver 
 
 			Si les bons rôles se font toujours rares, Uma Thurman fait partie du jury de Robert De Niro pour la 64ème édition du Festival de Cannes, un statut témoignant de la qualité de sa carrière. De moins en mois présente sur grand écran, la comédienne effectue ses premiers pas à la télévision, en 2012, dans la série Smash. Elle y incarne, le temps de cinq épisodes, une starlette qui décroche le rôle de Marilyn Monroe dans une production de Broadway centrée sur la fameuse star. La même année, on la retrouve, au cinéma, en Madeleine Forestier, l'une des conquêtes du Bel Ami Robert Pattinson, dans un long métrage adapté du célèbre roman de Guy de Maupassant."
 			);
+			$actor->setSlug("uma-thurman-$i");
 			$manager->persist($actor);
 		}
 
