@@ -3,6 +3,7 @@
 namespace CineProject\PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Movie
@@ -23,6 +24,7 @@ class Movie
 
     /**
      * @var string
+     * @Assert\NotBlank(message = "Vous devez saisir un titre")
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
