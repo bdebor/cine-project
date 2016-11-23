@@ -4,6 +4,7 @@ namespace CineProject\PublicBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Actor
@@ -59,6 +60,15 @@ class Actor
      * @ORM\OneToOne(targetEntity="CineProject\PublicBundle\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=50)
+     * @Gedmo\Slug(fields={"fisrtName","lastName"}, separator="-")
+     */
+    private $slug;
+
 
     public function __construct()
     {
@@ -226,5 +236,28 @@ class Actor
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Actor
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

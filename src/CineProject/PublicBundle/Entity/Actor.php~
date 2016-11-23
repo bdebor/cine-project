@@ -4,6 +4,7 @@ namespace CineProject\PublicBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Actor
@@ -56,13 +57,21 @@ class Actor
     private $movies;
 
     /**
-     * @ORM\OneToOne(targetEntity="CineProject\PublicBundle\Entity\Image")
+     * @ORM\OneToOne(targetEntity="CineProject\PublicBundle\Entity\Image", cascade={"persist", "remove"})
      */
     private $image;
 
+    /**
+     * @var string
+     * @Gedmo\Slug(fields={"fisrtName","lastName"}, separator="-")
+     * @ORM\Column(name="slug", type="string", length=50)
+     */
+    private $slug;
+
+
     public function __construct()
     {
-        $this->$movies = new ArrayCollection();
+        $this->movies = new ArrayCollection();
     }
 
     public function getFullName()
