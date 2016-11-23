@@ -26,9 +26,9 @@ class Actor
     /**
      * @var string
      *
-     * @ORM\Column(name="fisrt_name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
-    private $fisrtName;
+    private $firstName;
 
     /**
      * @var string
@@ -65,7 +65,7 @@ class Actor
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=50)
-     * @Gedmo\Slug(fields={"fisrtName","lastName"}, separator="-")
+     * @Gedmo\Slug(fields={"firstName","lastName"}, separator="-")
      */
     private $slug;
 
@@ -77,7 +77,7 @@ class Actor
 
     public function getFullName()
     {
-        return $this->fisrtName.' '.$this->lastName;
+        return $this->firstName.' '.$this->lastName;
     }
 
     /**
@@ -88,29 +88,6 @@ class Actor
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set fisrtName
-     *
-     * @param string $fisrtName
-     * @return Actor
-     */
-    public function setFisrtName($fisrtName)
-    {
-        $this->fisrtName = $fisrtName;
-
-        return $this;
-    }
-
-    /**
-     * Get fisrtName
-     *
-     * @return string 
-     */
-    public function getFisrtName()
-    {
-        return $this->fisrtName;
     }
 
     /**
@@ -259,5 +236,28 @@ class Actor
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     * @return Actor
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
     }
 }

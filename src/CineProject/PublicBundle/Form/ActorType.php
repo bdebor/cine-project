@@ -14,7 +14,7 @@ class ActorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fisrtName')
+            ->add('firstName')
             ->add('lastName')
             ->add('birthDate')
             ->add('biography')

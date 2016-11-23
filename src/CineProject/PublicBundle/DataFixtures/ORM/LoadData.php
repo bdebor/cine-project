@@ -26,7 +26,7 @@ class LoadData implements FixtureInterface
 
 		for ($i = 1; $i <= 10; $i++) {
 			$actor = new Actor();
-			$actor->setFisrtName('Uma');
+			$actor->setFirstName('Uma');
 			$actor->setLastName("Thurman $i");
 			$birthDate = new \DateTime( '1970/04/29' );
 			$actor->setBirthDate($birthDate);
