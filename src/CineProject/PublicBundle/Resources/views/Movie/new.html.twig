@@ -2,8 +2,8 @@
 {% block body %}
 	<h1>Ajouter un film</h1>
 
-	{#{{ form_start(form) }}#}
-	{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+	{{ form_start(form) }}
+	{#{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}#}
 	{{ form_widget(form) }}
 	<input type="submit" value="Create" />
 	{{ form_end(form) }}

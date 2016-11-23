@@ -25,6 +25,12 @@ class Movie
     /**
      * @var string
      * @Assert\NotBlank(message = "Vous devez saisir un titre")
+     * @Assert\Length(
+     *  min = 5,
+     *  max = 50,
+     *  minMessage = "Your first name must be at least {{ limit }} characters long",
+     *  maxMessage = "Your first name cannot be longer than {{ limit }} characters"
+     * )
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
