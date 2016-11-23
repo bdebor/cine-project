@@ -2,7 +2,9 @@
 
 {% block body %}
     <h1>Actor edit</h1>
-
+    {% if actor.image %}
+        <img src="{{ asset(actor.image.getWebPath()) }}">
+    {% endif %}
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
         <input type="submit" value="Edit" />

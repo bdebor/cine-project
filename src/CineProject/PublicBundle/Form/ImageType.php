@@ -3,10 +3,11 @@
 namespace CineProject\PublicBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ActorType extends AbstractType
+class ImageType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,12 +15,8 @@ class ActorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fisrtName')
-            ->add('lastName')
-            ->add('birthDate')
-            ->add('biography')
-            ->add('image',new ImageType())
-        ;
+            //->add('nom');
+            ->add('file', FileType::class);
     }
     
     /**
@@ -28,7 +25,7 @@ class ActorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CineProject\PublicBundle\Entity\Actor'
+            'data_class' => 'CineProject\PublicBundle\Entity\Image'
         ));
     }
 
@@ -37,7 +34,7 @@ class ActorType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'cineproject_publicbundle_actor';
+        return 'cineproject_publicbundle_image';
     }
 
 

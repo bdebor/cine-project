@@ -2,6 +2,9 @@
 
 {% block body %}
     <h1>Actor</h1>
+    {% if actor.image %}
+        <img src="{{ asset(actor.image.getWebPath()) }}">
+    {% endif %}
     <table>
         <tbody>
             <tr>

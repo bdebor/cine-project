@@ -1,0 +1,200 @@
+<?php
+
+namespace CineProject\PublicBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+/**
+ * Image
+ *
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="CineProject\PublicBundle\Repository\ImageRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Image
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    private $oldNom ;
+
+    /**
+     * @Assert\File(
+     *      mimeTypes = {"image/jpg","image/jpeg","image/tiff","image/png"},
+     *      mimeTypesMessage = "Merci d'entrer une image valide",
+     *      maxSize = "2048k",
+     *      maxSizeMessage = "le fichier est trop lourd"
+     * )
+     *
+     */
+    private $file;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Image
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file ;
+        if(null !== $this->nom)
+        {
+            $this->oldNom = $this->nom ;
+            $this->nom = null ;
+        }
+        else
+        {
+            $this->nom = ' ';
+        }
+        return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->file ;
+    }
+
+    public function setOldNom($nom)
+    {
+        $this->oldNom = $nom;
+        return $this ;
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if(null === $this->file)
+        {
+            return false ;
+        }
+
+        if(null !== $this->oldNom)
+        {
+            if(file_exists($this->getAbsoluteOldPath()))
+            {
+                unlink($this->getAbsoluteOldPath()) ;
+            }
+        }
+
+        $this->nom = $this->id.'_'.$this->file->getClientOriginalName() ;
+        $this->file->move($this->getUploadRootDir(),$this->nom);
+        $this->file = null ;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if(null !== $this->file)
+        {
+            $this->nom = $this->file->getClientOriginalName() ;
+        }
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir() ;
+    }
+
+    public function getUploadDir()
+    {
+        return 'upload/img' ;
+    }
+
+    public function getWebPath()
+    {
+        if(null === $this->nom)
+        {
+            return null ;
+        }
+        else
+        {
+            return $this->getUploadDir().'/'.$this->id.'_'.$this->nom ;
+        }
+    }
+
+    /**
+     * @ORM\PreRemove()
+     *
+     */
+    public function removeFile()
+    {
+        $file = $this->getAbsolutePath() ;
+        if(file_exists($file))
+        {
+            unlink($file) ;
+        }
+    }
+
+    public function getAbsolutePath()
+    {
+        if(null === $this->nom)
+        {
+            return null ;
+        }
+        else
+        {
+            return $this->getUploadRootDir().'/'.$this->id.'_'.$this->nom ;
+        }
+    }
+
+    public function getAbsoluteOldPath()
+    {
+        if(null === $this->oldNom)
+        {
+            return null ;
+        }
+        else
+        {
+            return $this->getUploadRootDir().'/'.$this->id.'_'.$this->oldNom ;
+        }
+    }
+}

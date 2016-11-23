@@ -2,6 +2,7 @@
 
 namespace CineProject\PublicBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -53,6 +54,11 @@ class Actor
      * @ORM\ManyToMany(targetEntity="CineProject\PublicBundle\Entity\Movie", mappedBy="actors")
      */
     private $movies;
+
+    /**
+     * @ORM\OneToOne(targetEntity="CineProject\PublicBundle\Entity\Image")
+     */
+    private $image;
 
     public function __construct()
     {
@@ -164,5 +170,61 @@ class Actor
     public function getBiography()
     {
         return $this->biography;
+    }
+
+    /**
+     * Add movies
+     *
+     * @param \CineProject\PublicBundle\Entity\Movie $movies
+     * @return Actor
+     */
+    public function addMovie(\CineProject\PublicBundle\Entity\Movie $movies)
+    {
+        $this->movies[] = $movies;
+
+        return $this;
+    }
+
+    /**
+     * Remove movies
+     *
+     * @param \CineProject\PublicBundle\Entity\Movie $movies
+     */
+    public function removeMovie(\CineProject\PublicBundle\Entity\Movie $movies)
+    {
+        $this->movies->removeElement($movies);
+    }
+
+    /**
+     * Get movies
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMovies()
+    {
+        return $this->movies;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \CineProject\PublicBundle\Entity\Image $image
+     * @return Actor
+     */
+    public function setImage(\CineProject\PublicBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \CineProject\PublicBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

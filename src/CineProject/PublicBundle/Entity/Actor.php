@@ -2,6 +2,7 @@
 
 namespace CineProject\PublicBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -54,9 +55,14 @@ class Actor
      */
     private $movies;
 
+    /**
+     * @ORM\OneToOne(targetEntity="CineProject\PublicBundle\Entity\Image", cascade={"persist", "remove"})
+     */
+    private $image;
+
     public function __construct()
     {
-        $this->$movies = new ArrayCollection();
+        $this->movies = new ArrayCollection();
     }
 
     public function getFullName()
@@ -197,5 +203,28 @@ class Actor
     public function getMovies()
     {
         return $this->movies;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \CineProject\PublicBundle\Entity\Image $image
+     * @return Actor
+     */
+    public function setImage(\CineProject\PublicBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \CineProject\PublicBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
