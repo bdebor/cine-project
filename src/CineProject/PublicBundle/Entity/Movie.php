@@ -63,6 +63,12 @@ class Movie
      */
     private $actors;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="grade", type="integer", nullable=true)
+     */
+    private $grade;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
@@ -201,5 +207,28 @@ class Movie
     public function getActors()
     {
         return $this->actors;
+    }
+
+    /**
+     * Set grade
+     *
+     * @param integer $grade
+     * @return Movie
+     */
+    public function setGrade($grade)
+    {
+        $this->grade = $grade;
+
+        return $this;
+    }
+
+    /**
+     * Get grade
+     *
+     * @return integer 
+     */
+    public function getGrade()
+    {
+        return $this->grade;
     }
 }

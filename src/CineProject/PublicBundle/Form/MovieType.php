@@ -20,13 +20,20 @@ class MovieType extends AbstractType
             ->add('title', TextType::class, array(
                 'required' => false
             ))
+            //->add('grade')
+            ->add('grade', ChoiceType::class, array(
+                'choices' => array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'),
+                'choices_as_values' => true, // not necessary In Symfony 3
+                'expanded' => true,
+                'multiple' => false,
+                'required' => false
+            ))
             ->add('description')
             ->add('releaseDate')
             //->add('visible');
             ->add('visible', ChoiceType::class, array(
                 'choices' => array('Non' => false, 'Oui' => true),
-                // always include this
-                'choices_as_values' => true,
+                'choices_as_values' => true, // not necessary In Symfony 3
                 'expanded' => true,
                 'multiple' => false,
             ))
