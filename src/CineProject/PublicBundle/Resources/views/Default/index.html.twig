@@ -1,5 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
 
 {% block body %}
-	Hello World!
+	<p>Meilleurs films :</p>
+	<ul>
+		{% for bestMovie in bestMovies %}
+			<li>
+				<p>Titre : <a href="{{ path('movie_show', {id: bestMovie.id}) }}">{{ bestMovie.title }}</a></p>
+				<p>Note :{{ bestMovie.grade }}</p>
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}

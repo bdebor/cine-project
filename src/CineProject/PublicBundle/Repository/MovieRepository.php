@@ -12,4 +12,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class MovieRepository extends EntityRepository
 {
+//	public function findBestMovies() {
+//		return $this->getEntityManager()->createQueryBuilder(
+//			'SELECT m FROM CineProjectPublicBundle:Movie m
+//			ORDER BY m.grade DESC
+//			')
+//			->setFirstResult(0)
+//			->setMaxResults(5)
+//			->getResult();
+//	}
+
+	public function findBestMovies() {
+		return $this
+//			->getEntityManager()
+//			->createQueryBuilder()
+//			->select('a')
+//			->from('OCPlatformBundle:Advert', 'a')
+			->createQueryBuilder('m') // shortcut
+			->orderBy('m.grade', 'DESC')
+			->setFirstResult(0)
+			->setMaxResults(5)
+			->getQuery()
+			->getResult();
+	}
 }
