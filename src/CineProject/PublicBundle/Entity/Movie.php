@@ -45,9 +45,9 @@ class Movie
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="visible", type="boolean")
      */
-    private $isActive;
+    private $visible;
 
 
     /**
@@ -130,25 +130,25 @@ class Movie
     }
 
     /**
-     * Set isActive
+     * Set visible
      *
-     * @param boolean $isActive
+     * @param boolean $visible
      * @return Movie
      */
-    public function setIsActive($isActive)
+    public function setVisible($visible)
     {
-        $this->isActive = $isActive;
+        $this->visible = $visible;
 
         return $this;
     }
 
     /**
-     * Get isActive
+     * Get visible
      *
      * @return boolean 
      */
-    public function getIsActive()
+    public function getVisible()
     {
-        return $this->isActive;
+        return $this->visible;
     }
 }

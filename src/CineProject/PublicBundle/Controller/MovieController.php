@@ -11,7 +11,7 @@ class MovieController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $movies = $em->getRepository('CineProjectPublicBundle:Movie')->findByIsActive(true);
+        $movies = $em->getRepository('CineProjectPublicBundle:Movie')->findByVisible(true);
 
         return $this->render('CineProjectPublicBundle:Movie:index.html.twig', array('movies' => $movies));
     }

@@ -45,8 +45,8 @@ class Movie
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="visible", type="boolean")
      */
-    private $isActive;
+    private $visible;
 
 }
