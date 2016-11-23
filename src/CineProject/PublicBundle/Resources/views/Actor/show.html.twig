@@ -2,7 +2,6 @@
 
 {% block body %}
     <h1>Actor</h1>
-
     <table>
         <tbody>
             <tr>
@@ -24,6 +23,16 @@
             <tr>
                 <th>Biography</th>
                 <td>{{ actor.biography }}</td>
+            </tr>
+            <tr>
+                <th>Films</th>
+                <td>
+                    <ul>
+                        {% for movie in actor.movies %}
+                            <li><a href="{{ path('movie_show', {id: movie.id}) }}">{{ movie.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

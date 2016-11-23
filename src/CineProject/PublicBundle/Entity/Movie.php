@@ -59,7 +59,7 @@ class Movie
     private $visible;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CineProject\PublicBundle\Entity\Actor")
+     * @ORM\ManyToMany(targetEntity="CineProject\PublicBundle\Entity\Actor", inversedBy="movies")
      */
     private $actors;
 

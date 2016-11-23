@@ -165,37 +165,4 @@ class Actor
     {
         return $this->biography;
     }
-
-    /**
-     * Add movies
-     *
-     * @param \CineProject\PublicBundle\Entity\Movie $movies
-     * @return Actor
-     */
-    public function addMovie(\CineProject\PublicBundle\Entity\Movie $movies)
-    {
-        $this->movies[] = $movies;
-
-        return $this;
-    }
-
-    /**
-     * Remove movies
-     *
-     * @param \CineProject\PublicBundle\Entity\Movie $movies
-     */
-    public function removeMovie(\CineProject\PublicBundle\Entity\Movie $movies)
-    {
-        $this->movies->removeElement($movies);
-    }
-
-    /**
-     * Get movies
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMovies()
-    {
-        return $this->movies;
-    }
 }
