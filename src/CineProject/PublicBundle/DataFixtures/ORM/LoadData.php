@@ -20,14 +20,14 @@ class LoadData implements FixtureInterface
 				");
 			$releaseDate = new \DateTime( '1994/10/26' );
 			$movie->setReleaseDate($releaseDate);
-			$movie->setIsActive(true);
+			$movie->setVisible(true);
 			$manager->persist($movie);
 		}
 
 		for ($i = 1; $i <= 10; $i++) {
 			$actor = new Actor();
 			$actor->setFisrtName('Uma');
-			$actor->setLastName('Thurman');
+			$actor->setLastName("Thurman $i");
 			$birthDate = new \DateTime( '1970/04/29' );
 			$actor->setBirthDate($birthDate);
 			$actor->setBiography(

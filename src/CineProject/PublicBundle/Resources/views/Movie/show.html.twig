@@ -4,6 +4,12 @@
     <h4>{{ movie.title }}</h4>
     <p>{{ movie.description|nl2br }}</p>
     <p>{{ movie.releaseDate|date('d/m/Y') }}</p>
+    <ul>
+        {% for actor in movie.actors %}
+            <li><a href="{{ path('actor_show', {id: actor.id}) }}">{{ actor.fullName }}</a></li>
+        {% endfor %}
+    </ul>
+
 
     <ul>
         <li>
