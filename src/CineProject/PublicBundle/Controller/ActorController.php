@@ -40,7 +40,13 @@ class ActorController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
-            $em->flush($actor);
+
+            $fMovies = $form->getData()->getMovies();
+            foreach($fMovies as $fMovie){
+                $fMovie->addActor($actor);
+            }
+
+            $em->flush();
 
             return $this->redirectToRoute('actor_show', array('slug' => $actor->getSlug()));
         }
@@ -71,12 +77,45 @@ class ActorController extends Controller
      */
     public function editAction(Request $request, Actor $actor)
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $ActorWithFilms = $em->getRepository('CineProjectPublicBundle:Actor')->findActorWithFilms($actor->getId()); // Because $actor
+
+        $moviesToRemove = [];
+        if($ActorWithFilms){
+            foreach($ActorWithFilms->getMovies() as $movie) {
+                $moviesToRemove[] = $movie;
+            }
+        }
+
         $deleteForm = $this->createDeleteForm($actor);
+
         $editForm = $this->createForm('CineProject\PublicBundle\Form\ActorType', $actor);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em->persist($actor);
+
+            $fMovies = $editForm->getData()->getMovies();
+
+            foreach($fMovies as $fMovie){
+                $moviesIsAlreadyPresent = false;
+
+                foreach($moviesToRemove as $index => $movieToRemove){
+                    if($fMovie === $movieToRemove){
+                        $moviesIsAlreadyPresent = true;
+                        unset($moviesToRemove[$index]);
+                        break;
+                    }
+                }
+                if($moviesIsAlreadyPresent === false){
+                    $fMovie->addActor($actor);
+                }
+                foreach($moviesToRemove as $movieToRemove){
+                    $movieToRemove->removeActor($actor);
+                }
+            }
+            $em->flush();
 
             return $this->redirectToRoute('actor_edit', array('slug' => $actor->getSlug()));
         }

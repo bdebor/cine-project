@@ -2,6 +2,7 @@
 
 namespace CineProject\PublicBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +22,11 @@ class ActorType extends AbstractType
             ->add('image',new ImageType(), array(
                 'required' => false
             ))
+            ->add('movies', EntityType::class, array(
+                'class' => 'CineProjectPublicBundle:Movie',
+                'choice_label' => 'title',
+                'multiple' => true
+            ));
         ;
     }
     

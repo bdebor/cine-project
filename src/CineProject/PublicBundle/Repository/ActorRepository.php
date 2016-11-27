@@ -12,4 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActorRepository extends EntityRepository
 {
+	public function findActorWithFilms($id) {
+		$result = $this
+			->createQueryBuilder('a')
+			->addSelect('m')
+			->join('a.movies', 'm', 'WITH', 'a.id = :id')
+			->setParameter('id', $id)
+			->getQuery()
+			->getResult(); // Error with getSingleResult() if there is no associated movie to the actor.
+
+		if($result !== []){
+			$result = $result[0];
+		}else{
+			$result = false;
+		}
+		return $result;
+	}
+
 }

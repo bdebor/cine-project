@@ -168,7 +168,6 @@ class Actor
     public function addMovie(\CineProject\PublicBundle\Entity\Movie $movies)
     {
         $this->movies[] = $movies;
-
         return $this;
     }
 
