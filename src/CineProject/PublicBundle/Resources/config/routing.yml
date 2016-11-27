@@ -6,6 +6,10 @@ cine_project_public_film:
     resource: "@CineProjectPublicBundle/Resources/config/routing/movie.yml"
     prefix:  /film
 
+cine_project_public_category:
+    resource: "@CineProjectPublicBundle/Resources/config/routing/category.yml"
+    prefix:  /category
+
 cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }
