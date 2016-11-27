@@ -21,4 +21,3 @@ category_edit:
 category_delete:
     path:     /{id}/delete
     defaults: { _controller: "CineProjectPublicBundle:Category:delete" }
-    methods:  DELETE

@@ -12,4 +12,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+	public function findCategoryAndMovies($id)
+	{
+		return $this->createQueryBuilder('c')
+			->addSelect('m')
+			->leftJoin('c.movies','m')
+			->where('c.id = :id')
+			->setParameter('id',$id)
+			->getQuery()
+			->getSingleResult();
+	}
 }
