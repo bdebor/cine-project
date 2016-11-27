@@ -21,7 +21,10 @@ class MovieType extends AbstractType
             ->add('title', TextType::class, array(
                 'required' => false
             ))
-            //->add('grade')
+            ->add('category', EntityType::class, array(
+                'class' => 'CineProjectPublicBundle:Category',
+                'choice_label' => 'title'
+            ))
             ->add('grade', ChoiceType::class, array(
                 'choices' => array(1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5'),
                 'choices_as_values' => true, // not necessary In Symfony 3

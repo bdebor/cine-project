@@ -2,9 +2,12 @@
 
 {% block body %}
     <h4>{{ movie.title }}</h4>
-    <p>{{ movie.grade }}</p>
+    <p>Catégorie : {% if movie.category %}{{ movie.category.title }} {% endif %}</p>
+    <p>Note : {{ movie.grade }}</p>
+    <p>Description :</p>
     <p>{{ movie.description|nl2br }}</p>
-    <p>{{ movie.releaseDate|date('d/m/Y') }}</p>
+    <p>Date de sortie : {{ movie.releaseDate|date('d/m/Y') }}</p>
+    <p>Acteurs :</p>
     <ul>
         {% for actor in movie.actors %}
             <li><a href="{{ path('actor_show', {slug: actor.slug}) }}">{{ actor.fullName }}</a></li>
