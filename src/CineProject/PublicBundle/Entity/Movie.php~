@@ -69,6 +69,11 @@ class Movie
      */
     private $grade;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="CineProject\PublicBundle\Entity\Category", inversedBy="movies")
+     */
+    private $category;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
@@ -230,5 +235,28 @@ class Movie
     public function getGrade()
     {
         return $this->grade;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \CineProject\PublicBundle\Entity\Category $category
+     * @return Movie
+     */
+    public function setCategory(\CineProject\PublicBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \CineProject\PublicBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

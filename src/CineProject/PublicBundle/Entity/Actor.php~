@@ -168,7 +168,6 @@ class Actor
     public function addMovie(\CineProject\PublicBundle\Entity\Movie $movies)
     {
         $this->movies[] = $movies;
-
         return $this;
     }
 
@@ -236,5 +235,28 @@ class Actor
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     * @return Actor
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace CineProject\PublicBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +28,16 @@ class Category
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CineProject\PublicBundle\Entity\Movie", mappedBy="category")
+     */
+    private $movies;
+
+    public function __construct()
+    {
+        $this->movies = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -59,5 +70,38 @@ class Category
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Add movies
+     *
+     * @param \CineProject\PublicBundle\Entity\Movie $movies
+     * @return Category
+     */
+    public function addMovie(\CineProject\PublicBundle\Entity\Movie $movies)
+    {
+        $this->movies[] = $movies;
+
+        return $this;
+    }
+
+    /**
+     * Remove movies
+     *
+     * @param \CineProject\PublicBundle\Entity\Movie $movies
+     */
+    public function removeMovie(\CineProject\PublicBundle\Entity\Movie $movies)
+    {
+        $this->movies->removeElement($movies);
+    }
+
+    /**
+     * Get movies
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMovies()
+    {
+        return $this->movies;
     }
 }
