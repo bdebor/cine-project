@@ -21,12 +21,7 @@ class ActorRepository extends EntityRepository
 			->getQuery()
 			->getResult(); // Error with getSingleResult() if there is no associated movie to the actor.
 
-		if($result !== []){
-			$result = $result[0];
-		}else{
-			$result = false;
-		}
-		return $result;
+		return ($result !== [] ? $result[0] : false);
 	}
 
 }

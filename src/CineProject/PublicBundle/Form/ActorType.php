@@ -4,6 +4,7 @@ namespace CineProject\PublicBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,9 +18,12 @@ class ActorType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('birthDate')
+            ->add('birthDate', DateType::class, array(
+                'widget' => 'single_text',
+                'format' => 'dd-MM-yyyy'
+            ))
             ->add('biography')
-            ->add('image',new ImageType(), array(
+            ->add('image', new ImageType(), array(
                 'required' => false
             ))
             ->add('movies', EntityType::class, array(

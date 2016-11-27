@@ -25,7 +25,7 @@ class MovieController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($movie);
-            $em->flush($movie);
+            $em->flush();
 
             return $this->redirectToRoute('movie_show', array('id' => $movie->getId()));
         }
@@ -52,7 +52,9 @@ class MovieController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($movie);
+            $em->flush();
 
             return $this->redirectToRoute('movie_edit', array('id' => $movie->getId()));
         }
@@ -72,7 +74,7 @@ class MovieController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($movie);
-            $em->flush($movie);
+            $em->flush();
         }
 
         return $this->redirectToRoute('movie_index');
