@@ -4,6 +4,7 @@ namespace AppBundle\DataFixtures\ORM;
 
 use CineProject\PublicBundle\Entity\Actor;
 use CineProject\PublicBundle\Entity\Movie;
+use CineProject\PublicBundle\Entity\User;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -46,6 +47,16 @@ L'après Kill Bill est plutôt dur pour la comédienne, qui a du mal à trouver 
 			$actor->setSlug("uma-thurman-$i");
 			$manager->persist($actor);
 		}
+
+		/**/ // user admin
+		$user = new User();
+		$user->setUsername('admin');
+		$user->setEmail('email@domain.com');
+		$user->setPlainPassword('admin');
+		$user->setEnabled(true);
+		$user->setRoles(array('ROLE_ADMIN'));
+        $manager->persist($user);
+		/*/*/
 
 		$manager->flush();
 	}
