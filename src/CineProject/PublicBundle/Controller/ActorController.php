@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Actor controller.
  *
  */
-class ActorController extends Controller
+class ActorController extends AbstractController
 {
     /**
      * Lists all actor entities.
@@ -20,18 +20,10 @@ class ActorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        //$actors = $em->getRepository('CineProjectPublicBundle:Actor')->findAll();
-
         /**/ // pagination with KnpPaginatorBundle
-        $dql   = "SELECT a FROM CineProjectPublicBundle:Actor a";
+        $dql = "SELECT a FROM CineProjectPublicBundle:Actor a";
         $query = $em->createQuery($dql);
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            5 /*limit per page*/
-        );
+        $pagination = $this->pagination($query, 5);
         /*/*/
 
         return $this->render('CineProjectPublicBundle:Actor:index.html.twig', array(

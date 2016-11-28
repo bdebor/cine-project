@@ -6,23 +6,16 @@ use CineProject\PublicBundle\Entity\Movie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class MovieController extends Controller
+class MovieController extends AbstractController
 {
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        // $movies = $em->getRepository('CineProjectPublicBundle:Movie')->findByVisible(true);
 
         /**/ // pagination with KnpPaginatorBundle
-        $dql   = "SELECT m FROM CineProjectPublicBundle:Movie m WHERE m.visible = true";
+        $dql = "SELECT m FROM CineProjectPublicBundle:Movie m WHERE m.visible = true";
         $query = $em->createQuery($dql);
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1) /*page number*/,
-            5 /*limit per page*/
-        );
+        $pagination = $this->pagination($query, 5);
         /*/*/
 
         return $this->render('CineProjectPublicBundle:Movie:index.html.twig', array('movies' => $pagination));
