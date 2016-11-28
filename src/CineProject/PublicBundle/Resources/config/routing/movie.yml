@@ -21,7 +21,7 @@ movie_edit:
 movie_delete:
     path:     /{id}/delete
     defaults: { _controller: "CineProjectPublicBundle:Movie:delete" }
-    methods:  DELETE
+#    methods:  DELETE
 
 #movie_delete:
 #    path:     /{id}/delete

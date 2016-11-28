@@ -3,13 +3,24 @@
 {% block body %}
 	<ul>
 		{% for movie in movies %}
-			<li>
+			<li class="movie">
 				<h4><a href="{{ path('movie_show', { 'id': movie.id }) }}">{{ movie.title }}</a></h4>
 				<p>Catégorie : {% if movie.category %}{{ movie.category.title }} {% endif %}</p>
 				<p>Note : {{movie.grade }}</p>
 				<p>Description :</p>
 				<p>{{ movie.description|nl2br }}</p>
 				<p>Date de sortie : {{ movie.releaseDate|date('d/m/Y') }}</p>
+				<ul>
+					<li>
+						<a href="{{ path('movie_show', { 'id': movie.id }) }}">show</a>
+					</li>
+					<li>
+						<a href="{{ path('movie_edit', { 'id': movie.id }) }}">edit</a>
+					</li>
+					<li>
+						<a href="{{ path('movie_delete', {id: movie.id }) }}" class="remove">delete</a>
+					</li>
+				</ul>
 			</li>
 		{% endfor %}
 	</ul>
@@ -24,4 +35,27 @@
 			<a href="{{ path('movie_new') }}">Create a new movie</a>
 		</li>
 	</ul>
+{% endblock %}
+{% block javascripts %}
+	{{ parent() }}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".remove").click(function(e){
+				e.preventDefault();
+				if (confirm("Voulez-vous vraiment supprimer ce film?"))
+				{
+					$this = $(this);
+					var url = $this.attr('href');
+					$.get(
+							url,
+							function(){
+								$this.closest('.movie').fadeOut(function(){
+									$(this).remove();
+								});
+							}
+					);
+				}
+			});
+		});
+	</script>
 {% endblock %}

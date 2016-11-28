@@ -4,6 +4,7 @@ namespace CineProject\PublicBundle\Controller;
 
 use CineProject\PublicBundle\Entity\Movie;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends AbstractController
@@ -73,16 +74,23 @@ class MovieController extends AbstractController
 
     public function deleteAction(Request $request, Movie $movie)
     {
-        $form = $this->createDeleteForm($movie);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($request->isXmlHttpRequest()){
             $em = $this->getDoctrine()->getManager();
             $em->remove($movie);
             $em->flush();
-        }
+            return new JsonResponse(true);
+        }else{
+            $form = $this->createDeleteForm($movie);
+            $form->handleRequest($request);
 
-        return $this->redirectToRoute('movie_index');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($movie);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('movie_index');
+        }
     }
 
 //    public function deleteAction(Movie $movie)
