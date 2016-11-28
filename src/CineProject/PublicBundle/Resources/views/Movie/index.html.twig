@@ -10,6 +10,15 @@
 				<p>Description :</p>
 				<p>{{ movie.description|nl2br }}</p>
 				<p>Date de sortie : {{ movie.releaseDate|date('d/m/Y') }}</p>
+
+				<p>Favori :</p>
+				{% set favorites = app.session.get('favorites') %}
+				{% if movie.id in favorites %}
+					<input type="checkbox" checked class="favorite" data-url="{{ path('movie_favorite',{id: movie.id}) }}">
+				{% else %}
+					<input type="checkbox" class="favorite" data-url="{{ path('movie_favorite',{id: movie.id}) }}">
+				{% endif %}
+
 				<ul>
 					<li>
 						<a href="{{ path('movie_show', { 'id': movie.id }) }}">show</a>
@@ -47,14 +56,20 @@
 					$this = $(this);
 					var url = $this.attr('href');
 					$.get(
-							url,
-							function(){
-								$this.closest('.movie').fadeOut(function(){
-									$(this).remove();
-								});
-							}
+						url,
+						function(){
+							$this.closest('.movie').fadeOut(function(){
+								$(this).remove();
+							});
+						}
 					);
 				}
+			});
+			$(".favorite").click(function(){
+				var url = $(this).attr('data-url'); // Or: var url = $(this).data('url');
+				$.get(
+					url
+				);
 			});
 		});
 	</script>

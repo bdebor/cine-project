@@ -26,3 +26,7 @@ movie_delete:
 #movie_delete:
 #    path:     /{id}/delete
 #    defaults: { _controller: "CineProjectPublicBundle:Movie:delete" }
+
+movie_favorite:
+    path:  /film-favori/{id}
+    defaults: { _controller: "CineProjectPublicBundle:Movie:favorite" }

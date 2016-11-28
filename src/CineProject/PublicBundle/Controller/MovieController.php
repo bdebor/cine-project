@@ -121,4 +121,21 @@ class MovieController extends AbstractController
             ->getForm()
             ;
     }
+
+    public function favoriteAction(Request $request, $id)
+    {
+        $session = $request->getSession();
+        $favorites = $session->get('favorites');
+
+        if ($favorites && in_array($id, $favorites)) {
+            $key = array_search($id, $favorites);
+            unset($favorites[$key]);
+        } else {
+            $favorites[] = $id;
+        }
+        //var_dump($favorites);
+        $session->set('favorites', $favorites);
+
+        return new JsonResponse($favorites);
+    }
 }
