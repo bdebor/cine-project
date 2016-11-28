@@ -79,13 +79,9 @@ class ActorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ActorWithMovies = $em->getRepository('CineProjectPublicBundle:Actor')->findActorWithMovies($actor->getId());
-
         $moviesToRemove = [];
-        if($ActorWithMovies){
-            foreach($ActorWithMovies->getMovies() as $movie) {
-                $moviesToRemove[] = $movie;
-            }
+        foreach($actor->getMovies() as $movie) {
+            $moviesToRemove[] = $movie;
         }
 
         $deleteForm = $this->createDeleteForm($actor);
