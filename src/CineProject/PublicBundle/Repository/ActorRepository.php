@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActorRepository extends EntityRepository
 {
-	public function findActorWithFilms($id) {
+	public function findActorWithMovies($id) {
 		$result = $this
 			->createQueryBuilder('a')
 			->addSelect('m')

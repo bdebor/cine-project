@@ -79,11 +79,11 @@ class ActorController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $ActorWithFilms = $em->getRepository('CineProjectPublicBundle:Actor')->findActorWithFilms($actor->getId()); // Because $actor
+        $ActorWithMovies = $em->getRepository('CineProjectPublicBundle:Actor')->findActorWithMovies($actor->getId());
 
         $moviesToRemove = [];
-        if($ActorWithFilms){
-            foreach($ActorWithFilms->getMovies() as $movie) {
+        if($ActorWithMovies){
+            foreach($ActorWithMovies->getMovies() as $movie) {
                 $moviesToRemove[] = $movie;
             }
         }
