@@ -8,12 +8,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MovieController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $movies = $em->getRepository('CineProjectPublicBundle:Movie')->findByVisible(true);
+        // $movies = $em->getRepository('CineProjectPublicBundle:Movie')->findByVisible(true);
 
-        return $this->render('CineProjectPublicBundle:Movie:index.html.twig', array('movies' => $movies));
+        /**/ // pagination with KnpPaginatorBundle
+        $dql   = "SELECT m FROM CineProjectPublicBundle:Movie m WHERE m.visible = true";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1) /*page number*/,
+            5 /*limit per page*/
+        );
+        /*/*/
+
+        return $this->render('CineProjectPublicBundle:Movie:index.html.twig', array('movies' => $pagination));
     }
 
     public function newAction(Request $request)
