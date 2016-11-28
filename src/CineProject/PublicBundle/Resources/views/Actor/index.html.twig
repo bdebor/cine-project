@@ -40,6 +40,11 @@
         </tbody>
     </table>
 
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(actors) }}
+    </div>
+
     <ul>
         <li>
             <a href="{{ path('actor_new') }}">Create a new actor</a>

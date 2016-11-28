@@ -16,14 +16,26 @@ class ActorController extends Controller
      * Lists all actor entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $actors = $em->getRepository('CineProjectPublicBundle:Actor')->findAll();
+        //$actors = $em->getRepository('CineProjectPublicBundle:Actor')->findAll();
+
+        /**/ // pagination with KnpPaginatorBundle
+        $dql   = "SELECT a FROM CineProjectPublicBundle:Actor a";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
+        /*/*/
 
         return $this->render('CineProjectPublicBundle:Actor:index.html.twig', array(
-            'actors' => $actors,
+            'actors' => $pagination,
         ));
     }
 
