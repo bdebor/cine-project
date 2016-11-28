@@ -8,6 +8,7 @@ class AdminController extends Controller
 {
     public function indexAction()
     {
+        dump($this->getUser());
         return $this->render('CineProjectPublicBundle:Admin:index.html.twig');
     }
 }

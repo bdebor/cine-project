@@ -48,14 +48,21 @@ L'après Kill Bill est plutôt dur pour la comédienne, qui a du mal à trouver 
 			$manager->persist($actor);
 		}
 
-		/**/ // user admin
+		/**/ // users
 		$user = new User();
 		$user->setUsername('admin');
-		$user->setEmail('email@domain.com');
+		$user->setEmail('email1@domain.com');
 		$user->setPlainPassword('admin');
 		$user->setEnabled(true);
 		$user->setRoles(array('ROLE_ADMIN'));
         $manager->persist($user);
+
+		$user = new User();
+		$user->setUsername('user');
+		$user->setEmail('email2@domain.com');
+		$user->setPlainPassword('user');
+		$user->setEnabled(true);;
+		$manager->persist($user);
 		/*/*/
 
 		$manager->flush();
