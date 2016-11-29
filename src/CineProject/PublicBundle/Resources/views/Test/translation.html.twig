@@ -5,4 +5,12 @@
 	<p>{{ 'text'|trans|raw }}</p>
 	<p>{{ 'policy.title'|trans }}</p>
 	<p>{{ 'policy.content'|trans }}</p>
+
+	<hr>
+	<h2>Tests macros with Twig</h2>
+	{%  import "CineProjectPublicBundle:Macro:functions.html.twig" as allFunctions %}
+	{{ allFunctions.hello('blabla')}}
+	{{ allFunctions.hello('blabla')}}
 {% endblock %}
+
+

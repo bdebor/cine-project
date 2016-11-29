@@ -1,0 +1,7 @@
+{% macro hello(name) %}
+	<p>hello {{ name }}</p>
+{% endmacro %}
+
+{% macro img(route, alt, class) %}
+	<img src="{{ route }}" alt="{{ alt }}" class="{{ class }}" >
+{% endmacro %}
