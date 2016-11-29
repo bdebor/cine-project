@@ -45,9 +45,8 @@ class ActorController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
 
-            $fMovies = $form->getData()->getMovies();
-            foreach($fMovies as $fMovie){
-                $fMovie->addActor($actor);
+            foreach($actor->getMovies() as $movie){
+                $movie->addActor($actor);
             }
 
             $em->flush();
@@ -81,8 +80,6 @@ class ActorController extends AbstractController
      */
     public function editAction(Request $request, Actor $actor)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $moviesToRemove = [];
         foreach($actor->getMovies() as $movie) {
             $moviesToRemove[] = $movie;
@@ -94,22 +91,21 @@ class ActorController extends AbstractController
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
 
-            $fMovies = $editForm->getData()->getMovies();
-
-            foreach($fMovies as $fMovie){
+            foreach($actor->getMovies() as $movie){
                 $moviesIsAlreadyPresent = false;
 
                 foreach($moviesToRemove as $index => $movieToRemove){
-                    if($fMovie === $movieToRemove){
+                    if($movie === $movieToRemove){
                         $moviesIsAlreadyPresent = true;
                         unset($moviesToRemove[$index]);
                         break;
                     }
                 }
                 if($moviesIsAlreadyPresent === false){
-                    $fMovie->addActor($actor);
+                    $movie->addActor($actor);
                 }
                 foreach($moviesToRemove as $movieToRemove){
                     $movieToRemove->removeActor($actor);

@@ -74,9 +74,15 @@ class Movie
      */
     private $category;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="CineProject\PublicBundle\Entity\Director", inversedBy="movies")
+     */
+    private $directors;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
+        $this->directors = new ArrayCollection();
     }
 
     /**
@@ -258,5 +264,38 @@ class Movie
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add directors
+     *
+     * @param \CineProject\PublicBundle\Entity\Director $directors
+     * @return Movie
+     */
+    public function addDirector(\CineProject\PublicBundle\Entity\Director $directors)
+    {
+        $this->directors[] = $directors;
+
+        return $this;
+    }
+
+    /**
+     * Remove directors
+     *
+     * @param \CineProject\PublicBundle\Entity\Director $directors
+     */
+    public function removeDirector(\CineProject\PublicBundle\Entity\Director $directors)
+    {
+        $this->directors->removeElement($directors);
+    }
+
+    /**
+     * Get directors
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDirectors()
+    {
+        return $this->directors;
     }
 }

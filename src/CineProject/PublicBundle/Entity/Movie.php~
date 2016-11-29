@@ -74,9 +74,15 @@ class Movie
      */
     private $category;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="CineProject\PublicBundle\Entity\Director", inversedBy="movies")
+     */
+    private $directors;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
+        $this->directors = new ArrayCollection();
     }
 
     /**

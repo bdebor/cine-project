@@ -7,10 +7,9 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
-                <th>Birthdate</th>
-                <th>Biography</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,10 +17,13 @@
         {% for director in directors %}
             <tr>
                 <td><a href="{{ path('director_show', { 'id': director.id }) }}">{{ director.id }}</a></td>
+                <td>
+                    {% if director.image %}
+                        <img src="{{ asset(director.image.getWebPath()) }}">
+                    {% endif %}
+                </td>
                 <td>{{ director.firstName }}</td>
                 <td>{{ director.lastName }}</td>
-                <td>{% if director.birthDate %}{{ director.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ director.biography }}</td>
                 <td>
                     <ul>
                         <li>

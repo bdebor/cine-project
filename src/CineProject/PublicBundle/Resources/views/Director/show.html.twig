@@ -2,7 +2,9 @@
 
 {% block body %}
     <h1>Director</h1>
-
+    {% if director.image %}
+        <img src="{{ asset(director.image.getWebPath()) }}">
+    {% endif %}
     <table>
         <tbody>
             <tr>
@@ -24,6 +26,16 @@
             <tr>
                 <th>Biography</th>
                 <td>{{ director.biography }}</td>
+            </tr>
+            <tr>
+                <th>Films</th>
+                <td>
+                    <ul>
+                        {% for movie in director.movies %}
+                            <li><a href="{{ path('movie_show', {id: movie.id}) }}">{{ movie.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

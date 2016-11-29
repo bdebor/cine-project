@@ -31,6 +31,13 @@ class Image
      */
     private $nom;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="folder", type="string", length=255)
+     */
+    private $folder;
+
     private $oldNom ;
 
     /**
@@ -146,7 +153,7 @@ class Image
 
     public function getUploadDir()
     {
-        return 'upload/img' ;
+        return 'upload/img/'.$this->folder;
     }
 
     public function getWebPath()
@@ -196,5 +203,28 @@ class Image
         {
             return $this->getUploadRootDir().'/'.$this->id.'_'.$this->oldNom ;
         }
+    }
+
+    /**
+     * Set folder
+     *
+     * @param string $folder
+     * @return Image
+     */
+    public function setFolder($folder)
+    {
+        $this->folder = $folder;
+
+        return $this;
+    }
+
+    /**
+     * Get folder
+     *
+     * @return string 
+     */
+    public function getFolder()
+    {
+        return $this->folder;
     }
 }

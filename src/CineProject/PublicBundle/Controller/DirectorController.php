@@ -38,9 +38,19 @@ class DirectorController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $director->getImage();
+            if ($image) {
+                $image->setFolder("director");
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($director);
-            $em->flush($director);
+
+            foreach($director->getMovies() as $movie){
+                $movie->addDirector($director);
+            }
+
+            $em->flush();
 
             return $this->redirectToRoute('director_show', array('id' => $director->getId()));
         }
@@ -71,12 +81,43 @@ class DirectorController extends Controller
      */
     public function editAction(Request $request, Director $director)
     {
+        $moviesToRemove = [];
+        foreach($director->getMovies() as $movie) {
+            $moviesToRemove[] = $movie;
+        }
+
         $deleteForm = $this->createDeleteForm($director);
+
         $editForm = $this->createForm('CineProject\PublicBundle\Form\DirectorType', $director);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $image = $director->getImage();
+            if ($image) {
+                $image->setFolder("director");
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($director);
+
+            foreach($director->getMovies() as $movie){
+                $moviesIsAlreadyPresent = false;
+
+                foreach($moviesToRemove as $index => $movieToRemove){
+                    if($movie === $movieToRemove){
+                        $moviesIsAlreadyPresent = true;
+                        unset($moviesToRemove[$index]);
+                        break;
+                    }
+                }
+                if($moviesIsAlreadyPresent === false){
+                    $movie->addDirector($director);
+                }
+                foreach($moviesToRemove as $movieToRemove){
+                    $movieToRemove->removeDirector($director);
+                }
+            }
+            $em->flush();
 
             return $this->redirectToRoute('director_edit', array('id' => $director->getId()));
         }
