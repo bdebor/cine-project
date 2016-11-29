@@ -1,0 +1,24 @@
+director_index:
+    path:     /
+    defaults: { _controller: "CineProjectPublicBundle:Director:index" }
+    methods:  GET
+
+director_show:
+    path:     /{id}/show
+    defaults: { _controller: "CineProjectPublicBundle:Director:show" }
+    methods:  GET
+
+director_new:
+    path:     /new
+    defaults: { _controller: "CineProjectPublicBundle:Director:new" }
+    methods:  [GET, POST]
+
+director_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CineProjectPublicBundle:Director:edit" }
+    methods:  [GET, POST]
+
+director_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CineProjectPublicBundle:Director:delete" }
+    methods:  DELETE

@@ -1,0 +1,44 @@
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1>Director</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ director.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ director.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ director.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Birthdate</th>
+                <td>{% if director.birthDate %}{{ director.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Biography</th>
+                <td>{{ director.biography }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('director_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('director_edit', { 'id': director.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

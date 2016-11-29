@@ -1,0 +1,45 @@
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1>Directors list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Birthdate</th>
+                <th>Biography</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for director in directors %}
+            <tr>
+                <td><a href="{{ path('director_show', { 'id': director.id }) }}">{{ director.id }}</a></td>
+                <td>{{ director.firstName }}</td>
+                <td>{{ director.lastName }}</td>
+                <td>{% if director.birthDate %}{{ director.birthDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ director.biography }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('director_show', { 'id': director.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('director_edit', { 'id': director.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('director_new') }}">Create a new director</a>
+        </li>
+    </ul>
+{% endblock %}
