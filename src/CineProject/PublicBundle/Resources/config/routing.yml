@@ -17,3 +17,7 @@ cine_project_public_homepage:
 cine_project_admin:
     path:     /admin
     defaults: { _controller: CineProjectPublicBundle:Admin:index }
+
+cine_project_test_translation:
+    path:     /{_locale}/test-translation
+    defaults: { _controller: CineProjectPublicBundle:Test:translation }
