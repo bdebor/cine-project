@@ -18,6 +18,10 @@ cine_project_public_cinema:
     resource: "@CineProjectPublicBundle/Resources/config/routing/cinema.yml"
     prefix:  /cinema
 
+cine_project_public_session:
+    resource: "@CineProjectPublicBundle/Resources/config/routing/session.yml"
+    prefix:  /session
+
 cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }
