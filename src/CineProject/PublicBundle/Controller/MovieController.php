@@ -44,10 +44,14 @@ class MovieController extends AbstractController
 
     public function showAction(Movie $movie)
     {
+        $em = $this->getDoctrine()->getManager();
+        $sessions = $em->getRepository('CineProjectPublicBundle:Session')->findByMovie($movie);
+
         $deleteForm = $this->createDeleteForm($movie);
         return $this->render('CineProjectPublicBundle:Movie:show.html.twig', array(
             'movie' => $movie,
             'delete_form' => $deleteForm->createView(),
+            'sessions' => $sessions
         ));
     }
 

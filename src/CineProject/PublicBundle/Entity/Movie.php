@@ -79,10 +79,16 @@ class Movie
      */
     private $directors;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CineProject\PublicBundle\Entity\Category", mappedBy="movie")
+     */
+    private $sessions;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
         $this->directors = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
     }
 
     /**
@@ -297,5 +303,38 @@ class Movie
     public function getDirectors()
     {
         return $this->directors;
+    }
+
+    /**
+     * Add sessions
+     *
+     * @param \CineProject\PublicBundle\Entity\Category $sessions
+     * @return Movie
+     */
+    public function addSession(\CineProject\PublicBundle\Entity\Category $sessions)
+    {
+        $this->sessions[] = $sessions;
+
+        return $this;
+    }
+
+    /**
+     * Remove sessions
+     *
+     * @param \CineProject\PublicBundle\Entity\Category $sessions
+     */
+    public function removeSession(\CineProject\PublicBundle\Entity\Category $sessions)
+    {
+        $this->sessions->removeElement($sessions);
+    }
+
+    /**
+     * Get sessions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSessions()
+    {
+        return $this->sessions;
     }
 }

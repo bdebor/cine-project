@@ -29,7 +29,7 @@ class Session
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CineProject\PublicBundle\Entity\Movie")
+     * @ORM\ManyToOne(targetEntity="CineProject\PublicBundle\Entity\Movie", inversedBy="sessions")
      */
     private $movie;
 

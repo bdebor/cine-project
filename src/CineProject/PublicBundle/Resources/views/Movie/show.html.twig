@@ -13,7 +13,14 @@
             <li><a href="{{ path('actor_show', {slug: actor.slug}) }}">{{ actor.fullName }}</a></li>
         {% endfor %}
     </ul>
-
+    <p>Séances :</p>
+    <ul>
+        {#{% for session in movie.sessions %} Error Despite bidirectional association ???#}
+        {% for session in sessions %}
+            <li>{{ session.date|date('d/m/Y H:i') }}</li>
+            cinema : <a href="{{ path('cinema_show', {id: session.cinema.id}) }}">{{ session.cinema.name}}</a>
+        {% endfor %}
+    </ul>
 
     <ul>
         <li>
