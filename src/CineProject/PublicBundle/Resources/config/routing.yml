@@ -14,6 +14,10 @@ cine_project_public_director:
     resource: "@CineProjectPublicBundle/Resources/config/routing/director.yml"
     prefix:  /director
 
+cine_project_public_cinema:
+    resource: "@CineProjectPublicBundle/Resources/config/routing/cinema.yml"
+    prefix:  /cinema
+
 cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }

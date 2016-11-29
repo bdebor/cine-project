@@ -1,0 +1,44 @@
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
+
+{% block body %}
+    <h1>Cinema</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cinema.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ cinema.name }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ cinema.address }}</td>
+            </tr>
+            <tr>
+                <th>Zipcode</th>
+                <td>{{ cinema.zipCode }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ cinema.city }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('cinema_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('cinema_edit', { 'id': cinema.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

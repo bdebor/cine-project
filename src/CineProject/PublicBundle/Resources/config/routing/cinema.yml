@@ -1,0 +1,24 @@
+cinema_index:
+    path:     /
+    defaults: { _controller: "CineProjectPublicBundle:Cinema:index" }
+    methods:  GET
+
+cinema_show:
+    path:     /{id}/show
+    defaults: { _controller: "CineProjectPublicBundle:Cinema:show" }
+    methods:  GET
+
+cinema_new:
+    path:     /new
+    defaults: { _controller: "CineProjectPublicBundle:Cinema:new" }
+    methods:  [GET, POST]
+
+cinema_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CineProjectPublicBundle:Cinema:edit" }
+    methods:  [GET, POST]
+
+cinema_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CineProjectPublicBundle:Cinema:delete" }
+    methods:  DELETE
