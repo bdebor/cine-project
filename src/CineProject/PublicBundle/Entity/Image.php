@@ -4,7 +4,7 @@ namespace CineProject\PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile; // not used ???
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Image
@@ -40,6 +40,7 @@ class Image
 
     private $oldName;
 
+    private $thumbnails = array('small' => array(200,200), 'medium' => array(400,400), 'large' => array(600,600));
 
     /**
      * @Assert\File(
@@ -48,6 +49,8 @@ class Image
      *      maxSize = "2048k",
      *      maxSizeMessage = "le fichier est trop lourd"
      * )
+     *
+     * @var UploadedFile
      */
     private $file;
 
@@ -137,6 +140,28 @@ class Image
 
         $this->name = $this->id.'_'.$this->file->getClientOriginalName() ;
         $this->file->move($this->getUploadRootDir(),$this->name);
+
+        /**/ // thumbnails with the package Imagine
+        foreach ($this->thumbnails as $key => $value)
+        {
+            $file = $this->getUploadRootDir() . '/' . $this->getId() . '_' . $key . '_' . $this->oldName;
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+
+        $this->name = $this->file->getClientOriginalName();
+        foreach ($this->thumbnails as $key => $value){
+            $imagine = new \Imagine\Gd\Imagine();
+            $imagine
+                ->open($this->getAbsolutePath())
+                ->thumbnail(new\Imagine\Image\Box($value[0],$value[1]))
+                ->save(
+                    $this->getUploadDir() . '/'. $this->getId() . '_'. $key .'_' . $this->name, array('quality' => 80)
+                );
+        }
+        /*/*/
+
         $this->file = null ;
     }
 
@@ -150,6 +175,15 @@ class Image
         if (file_exists($file)) {
             unlink($file) ;
         }
+
+        foreach ($this->thumbnails as $key => $value) // thumbnails
+        {
+            $file = $this->getUploadRootDir().'/'.$this->getId().'_'.$key.'_'.$this->name;
+            if (file_exists($file))
+            {
+                unlink($file);
+            }
+        }
     }
 
     public function getUploadRootDir()
@@ -162,15 +196,25 @@ class Image
         return 'upload/img/'.$this->folder;
     }
 
-    public function getWebPath()
+    public function getWebPath($thumbnail = null)
     {
         if (null === $this->name) {
             return null ;
         } else {
-            return $this->getUploadDir().'/'.$this->id.'_'.$this->name ;
+            $name = $this->name;
+            if ($thumbnail) {
+                $tmpthumbnail = $this->getId().'_'.$thumbnail.'_'.$name;
+                if (file_exists($this->getUploadDir().'/'.$tmpthumbnail)) {
+                    $name = $tmpthumbnail;
+                } else {
+                    $name = $this->getId().'_'.$name;
+                }
+            } else {
+                $name = $this->id.'_'.$name;
+            }
+            return $this->getUploadDir().'/'.$name;
         }
     }
-
 
     public function getAbsolutePath()
     {

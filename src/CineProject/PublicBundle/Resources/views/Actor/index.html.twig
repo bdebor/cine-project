@@ -20,7 +20,7 @@
                 <td><a href="{{ path('actor_show', { 'slug': actor.slug }) }}">{{ actor.id }}</a></td>
                 <td>
                     {% if actor.image %}
-                        <img src="{{ asset(actor.image.getWebPath()) }}">
+                        <img src="{{ asset(actor.image.getWebPath('small')) }}">
                     {% endif %}
                 </td>
                 <td>{{ actor.firstName }}</td>
