@@ -4,7 +4,7 @@ namespace CineProject\PublicBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile; // not used ???
 
 /**
  * Image
@@ -27,18 +27,19 @@ class Image
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $nom;
+    private $name;
 
     /**
      * @var string
      *
      * @ORM\Column(name="folder", type="string", length=255)
      */
-    private $folder;
+    private $folder = 'actor';
 
-    private $oldNom ;
+    private $oldName;
+
 
     /**
      * @Assert\File(
@@ -47,7 +48,6 @@ class Image
      *      maxSize = "2048k",
      *      maxSizeMessage = "le fichier est trop lourd"
      * )
-     *
      */
     private $file;
 
@@ -62,39 +62,36 @@ class Image
     }
 
     /**
-     * Set nom
+     * Set name
      *
-     * @param string $nom
+     * @param string $name
      * @return Image
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get name
      *
      * @return string
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     public function setFile($file)
     {
         $this->file = $file ;
-        if(null !== $this->nom)
-        {
-            $this->oldNom = $this->nom ;
-            $this->nom = null ;
-        }
-        else
-        {
-            $this->nom = ' ';
+        if (null !== $this->name) {
+            $this->oldName = $this->name ;
+            $this->name = null ;
+        } else {
+            $this->name = ' '; // ???
         }
         return $this;
     }
@@ -104,34 +101,10 @@ class Image
         return $this->file ;
     }
 
-    public function setOldNom($nom)
+    public function setOldName($name)
     {
-        $this->oldNom = $nom;
+        $this->oldName = $name;
         return $this ;
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        if(null === $this->file)
-        {
-            return false ;
-        }
-
-        if(null !== $this->oldNom)
-        {
-            if(file_exists($this->getAbsoluteOldPath()))
-            {
-                unlink($this->getAbsoluteOldPath()) ;
-            }
-        }
-
-        $this->nom = $this->id.'_'.$this->file->getClientOriginalName() ;
-        $this->file->move($this->getUploadRootDir(),$this->nom);
-        $this->file = null ;
     }
 
     /**
@@ -140,9 +113,42 @@ class Image
      */
     public function preUpload()
     {
-        if(null !== $this->file)
-        {
-            $this->nom = $this->file->getClientOriginalName() ;
+        if (null !== $this->file) {
+            $this->name = $this->file->getClientOriginalName() ;
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return false ;
+        }
+
+        if (null !== $this->oldName) {
+            if(file_exists($this->getAbsoluteOldPath()))
+            {
+                unlink($this->getAbsoluteOldPath()) ;
+            }
+        }
+
+        $this->name = $this->id.'_'.$this->file->getClientOriginalName() ;
+        $this->file->move($this->getUploadRootDir(),$this->name);
+        $this->file = null ;
+    }
+
+    /**
+     * @ORM\PreRemove()
+     *
+     */
+    public function removeFile()
+    {
+        $file = $this->getAbsolutePath() ;
+        if (file_exists($file)) {
+            unlink($file) ;
         }
     }
 
@@ -158,50 +164,29 @@ class Image
 
     public function getWebPath()
     {
-        if(null === $this->nom)
-        {
+        if (null === $this->name) {
             return null ;
-        }
-        else
-        {
-            return $this->getUploadDir().'/'.$this->id.'_'.$this->nom ;
+        } else {
+            return $this->getUploadDir().'/'.$this->id.'_'.$this->name ;
         }
     }
 
-    /**
-     * @ORM\PreRemove()
-     *
-     */
-    public function removeFile()
-    {
-        $file = $this->getAbsolutePath() ;
-        if(file_exists($file))
-        {
-            unlink($file) ;
-        }
-    }
 
     public function getAbsolutePath()
     {
-        if(null === $this->nom)
-        {
+        if ( null === $this->name) {
             return null ;
-        }
-        else
-        {
-            return $this->getUploadRootDir().'/'.$this->id.'_'.$this->nom ;
+        } else {
+            return $this->getUploadRootDir().'/'.$this->id.'_'.$this->name ;
         }
     }
 
     public function getAbsoluteOldPath()
     {
-        if(null === $this->oldNom)
-        {
+        if (null === $this->oldName) {
             return null ;
-        }
-        else
-        {
-            return $this->getUploadRootDir().'/'.$this->id.'_'.$this->oldNom ;
+        } else {
+            return $this->getUploadRootDir().'/'.$this->id.'_'.$this->oldName ;
         }
     }
 
