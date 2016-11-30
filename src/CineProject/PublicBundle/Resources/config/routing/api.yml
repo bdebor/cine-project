@@ -1,0 +1,3 @@
+api_movie_get:
+    path:      /v1/movie/get
+    defaults: { _controller: CineProjectPublicBundle:Api:test }
