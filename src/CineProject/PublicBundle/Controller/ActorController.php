@@ -26,6 +26,12 @@ class ActorController extends AbstractController
         $pagination = $this->pagination($query, 5);
         /*/*/
 
+        /**/ // breadcrumb with WhiteOctoberBreadcrumbsBundle
+        $pages = array();
+        $pages['Acteurs'] = "";
+        $this->breadcrumb($pages);
+        /*/*/
+
         return $this->render('CineProjectPublicBundle:Actor:index.html.twig', array(
             'actors' => $pagination,
         ));
@@ -54,6 +60,13 @@ class ActorController extends AbstractController
             return $this->redirectToRoute('actor_show', array('slug' => $actor->getSlug()));
         }
 
+        /**/ // breadcrumb with WhiteOctoberBreadcrumbsBundle
+        $pages = array();
+        $pages['Acteurs'] = "actor_index";
+        $pages['Ajouter'] = "";
+        $this->breadcrumb($pages);
+        /**/
+
         return $this->render('CineProjectPublicBundle:Actor:new.html.twig', array(
             'actor' => $actor,
             'form' => $form->createView(),
@@ -67,6 +80,13 @@ class ActorController extends AbstractController
     public function showAction(Actor $actor)
     {
         $deleteForm = $this->createDeleteForm($actor);
+
+        /**/ // breadcrumb with WhiteOctoberBreadcrumbsBundle
+        $pages = array();
+        $pages['Acteurs'] = "actor_index";
+        $pages[$actor->getFullName()] = "";
+        $this->breadcrumb($pages);
+        /**/
 
         return $this->render('CineProjectPublicBundle:Actor:show.html.twig', array(
             'actor' => $actor,
@@ -115,6 +135,13 @@ class ActorController extends AbstractController
 
             return $this->redirectToRoute('actor_edit', array('slug' => $actor->getSlug()));
         }
+
+        /**/ // breadcrumb with WhiteOctoberBreadcrumbsBundle
+        $pages = array();
+        $pages['Acteurs'] = "actor_index";
+        $pages['Modifier '.$actor->getFullName()] = "";
+        $this->breadcrumb($pages);
+        /**/
 
         return $this->render('CineProjectPublicBundle:Actor:edit.html.twig', array(
             'actor' => $actor,

@@ -27,6 +27,9 @@
 				{% endif %}
 			</ul>
 
+		{% if wo_render_breadcrumbs() != '' %}
+			<p style="display: inline-block;">Fil d'ariane : {{ wo_render_breadcrumbs() }}</p>
+		{% endif %}
 
 	</header>
 

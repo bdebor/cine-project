@@ -16,4 +16,20 @@ class AbstractController extends Controller
         );
         return $pagination;
     }
+
+    public function breadcrumb($pages = null) // breadcrumb with WhiteOctoberBreadcrumbsBundle
+    {
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Home", $this->generateUrl('cine_project_public_homepage'));
+
+        if (isset($pages)) {
+            foreach ($pages as $key => $value){
+                if ($value != '') {
+                    $breadcrumbs->addItem($key, $this->generateUrl($value));
+                } else {
+                    $breadcrumbs->addItem($key);
+                }
+            }
+        }
+    }
 }

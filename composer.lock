@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1656b660bc82940e09697824ffff4ab4",
-    "content-hash": "6a71442d78b89377f8f096cf72d06e7e",
+    "hash": "a54066db464a82b646728d9e3127ed29",
+    "content-hash": "93727595f0f266d5ac802e7d334f0f0a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2507,6 +2507,49 @@
                 "templating"
             ],
             "time": "2016-11-19 05:52:49"
+        },
+        {
+            "name": "whiteoctober/breadcrumbs-bundle",
+            "version": "1.2.2",
+            "target-dir": "WhiteOctober/BreadcrumbsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/whiteoctober/BreadcrumbsBundle.git",
+                "reference": "52b748c0fce0b3500891a0501c4f796085d318de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/52b748c0fce0b3500891a0501c4f796085d318de",
+                "reference": "52b748c0fce0b3500891a0501c4f796085d318de",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/framework-bundle": "~2.0|~3.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "WhiteOctober\\BreadcrumbsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rich Sage",
+                    "email": "rich.sage@gmail.com"
+                }
+            ],
+            "description": "A small breadcrumbs bundle for Symfony2",
+            "homepage": "https://github.com/whiteoctober/BreadcrumbsBundle",
+            "keywords": [
+                "breadcrumbs",
+                "symfony"
+            ],
+            "time": "2016-02-05 10:46:40"
         }
     ],
     "packages-dev": [
