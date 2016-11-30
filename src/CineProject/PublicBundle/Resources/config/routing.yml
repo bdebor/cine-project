@@ -26,6 +26,10 @@ cine_project_public_homepage:
     path:     /
     defaults: { _controller: CineProjectPublicBundle:Default:index }
 
+cine_project_public_search:
+    path:     /rechercher
+    defaults: { _controller: CineProjectPublicBundle:Default:search }
+
 cine_project_admin:
     path:     /admin
     defaults: { _controller: CineProjectPublicBundle:Admin:index }

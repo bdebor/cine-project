@@ -1,0 +1,34 @@
+{% extends 'CineProjectPublicBundle::layout.html.twig' %}
+
+{% block body %}
+	<form action="{{ path('cine_project_public_search') }}">
+		<label>Rechercher : <input type="text" name="req"></label>
+		<input type="submit" value="ok">
+	</form>
+	{% if results %}
+		{% if results.movies|length == 0 and results.actors|length == 0 and results.directors|length == 0%}
+			<p>Aucun résultat pour <strong>{{ search }}</strong></p>
+		{% else %}
+			<p>Résultats pour <strong>{{ search }}</strong></p>
+			<p>Films :</p>
+			<ul>
+				{% for movie in results.movies %}
+					<li><a href="{{ path('movie_show', {id: movie.id}) }}">{{ movie.title }}</a></li>
+				{% endfor %}
+			</ul>
+			<p>Acteurs :</p>
+			<ul>
+				{% for actor in results.actors %}
+					<li><a href="{{ path('actor_show', {slug: actor.slug}) }}">{{ actor.fullName }}</a></li>
+				{% endfor %}
+			</ul>
+			<p>Réalisateurs :</p>
+			<ul>
+				{% for director in results.directors %}
+					<li><a href="{{ path('director_show', {id: director.id}) }}">{{ director.fullName }}</a></li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endif %}
+
+{% endblock %}

@@ -65,6 +65,11 @@ class Director
         $this->movies = new ArrayCollection();
     }
 
+    public function getFullName()
+    {
+        return $this->firstName.' '.$this->lastName;
+    }
+
     /**
      * Get id
      *
